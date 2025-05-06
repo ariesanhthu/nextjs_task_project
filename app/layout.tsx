@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Provider } from "@/components/ui/provider"
+import { Theme } from "@chakra-ui/react";
+import { ColorModeProvider } from "@/components/ui/color-mode";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,11 +26,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="vi" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <Provider>
+          <ColorModeProvider forcedTheme="dark">
+            <Theme appearance="dark">
+              {children}
+            </Theme>
+          </ColorModeProvider>
+        </Provider>
       </body>
     </html>
   );
